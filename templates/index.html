@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block leftcontent %}
+ <div class="left-aside">
+			<div id="myCarousel" class="carousel slide">
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="item active">
+						<img src="{% static 'images/carousel1.jpg' %}" alt="First slide">
+					</div>
+					<div class="item">
+						<img src="{% static 'images/carousel2.jpg' %}" alt="Second slide">
+					</div>
+					<div class="item">
+						<img src="{% static 'images/carousel3.jpg' %}" alt="Third slide">
+					</div>
+				</div>
+			</div>
+			<div class="page-header" id="page-title">
+				<h5>最新文章</h5>
+			</div>
+			<div class="container">
+				<div class="row">
+					{% for art in arts %}
+					<div class="col-md-12">
+						<div class="page-header">
+							<h5><a href="{{art.get_absolute_url}}">{{art.title}}</a></h5>
+							<p>{{art.desc}}</p>
+							<p><span class="glyphicon glyphicon-tag"></span>{{art.tag}}<span class="glyphicon glyphicon-time"></span>{{art.date_publish|date:"Y-m-d"}}<span class="glyphicon glyphicon-comment"></span>评论({{art.is_recommend}})<span class="glyphicon glyphicon-eye-open"></span>浏览({{art.click_count}})</p>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			<ul class="pagination">
+				{% if arts.has_previous %}
+				<li><a href="?page={{arts.previous_page_number}}">&laquo;</a></li>
+				{% else %}
+				<li><a href="javascript:void(0);" active="disabled">&laquo;</a></li>
+				{% endif %}
+				 <li><a href="javascript:void(0);">{{arts.number}}</a></li>
+				{% if arts.has_next %}
+				<li><a href="?page={{arts.next_page_number}}">&raquo;</a></li>
+				{% else %}
+				<li><a href="javascript:void(0);"  active="disabled">&raquo;</a></li>
+				{% endif %}
+			</ul>
+		</div>
+
+{% endblock leftcontent %}
+
+ 

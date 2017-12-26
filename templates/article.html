@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/article.css' %}">
+{% endblock css %}
+{% block leftcontent %}
+ <div class="left-aside">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="page-header">
+							<h5>{{article.title}}</h5>
+							<p>{{article.content}}</p>
+							<p><span class="glyphicon glyphicon-tag"></span>{{article.tag.name}}<span class="glyphicon glyphicon-time"></span>{{article.date_publish|date:"Y-m-d"}}<span class="glyphicon glyphicon-comment"></span>评论({{article.is_recommend}})<span class="glyphicon glyphicon-eye-open"></span>浏览({{article.click_count}})</p>
+						</div>
+					</div>
+					<div class="col-md-12" id="page_show">
+						<ul class="prev-next">
+							<li><span>上一篇:</span><a href="#">aaa</a></li>
+							<li><span>下一篇:</span><a href="#">bbb</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+{% endblock leftcontent %}
+{% block js %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.prev-next li a').attr('disabled','true');
+		$('.prev-next li a').attr('datahref',$('.prev-next li a').attr('href'));
+		$('.prev-next li a').removeAttr('href');
+	})
+</script>
+{% endblock js %}
+
+ 
